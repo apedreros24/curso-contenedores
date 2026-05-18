@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { INestApplication } from '@nestjs/common';
 import { App } from 'supertest/types';
 import { AppModule } from './app.module';
-import request from 'supertest';
+import * as request from 'supertest';
 
 type HealthResponse = {
   status: string;
