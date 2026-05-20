@@ -18,6 +18,7 @@ pipeline {
                     docker run --rm \
                     -v "$WORKSPACE":/workspace \
                     -w /workspace \
+                    --user root \
                     node:24-alpine \
                     sh -c "npm install -g pnpm && pnpm install"
                 '''
