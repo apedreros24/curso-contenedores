@@ -7,6 +7,7 @@ pipeline {
                     image 'node:24-alpine'
                     label 'wsl'
                     args '--user root'
+                    reuseNode true
                 }
             }
             stages {
