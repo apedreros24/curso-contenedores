@@ -1,34 +1,36 @@
 pipeline {
     agent {
-        label 'wsl'
+        label 'preferido'
     }
-
-    environment {
-        DOCKER_HOST = 'unix:///home/apedrero/.docker/desktop/docker.sock'
-    }
-
-    stages {
-
+    stages{
         stage("Primer paso pipeline") {
-            steps {
+            steps{
                 sh 'echo "saludos desde el terminal"'
             }
         }
-
-        stage("Segundo paso pipeline") {
-            steps {
+        stage("Segundo paso paso pipeline") {
+            agent {
+                label 'container'
+            }
+            steps{
                 sh 'node --version'
             }
         }
-
-        stage("tercer paso pipeline") {
-            steps {
-                sh '''
-                    echo $DOCKER_HOST
-                    docker ps
-                '''
+        stage("Tercer paso paso pipeline") {
+            steps{
+                sh 'docker ps'
             }
         }
-
+        stage("Cuarto paso paso pipeline") {
+            agent {
+                docker {
+                    image 'node:22'
+                    label 'wsl'
+                }
+            }
+            steps{
+                sh 'node --version'
+            }
+        }
     }
 }
