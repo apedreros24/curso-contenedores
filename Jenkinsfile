@@ -1,25 +1,27 @@
 pipeline {
-    agent none
+    agent {
+        label 'wsl'
+    }
     stages {
-        stage('CI - de nuestra aplicacion de contenedores') {
-            agent {
-                docker {
-                    image 'node:24-alpine'
-                    label 'wsl'
-                    args '--user root'
-                    reuseNode true
-                }
+        stage('Debug workspace') {
+            steps {
+                sh '''
+                    pwd
+                    ls -la
+                    find . -maxdepth 3 -name package.json
+                '''
             }
-            stages {
-                stage('CI - Instalacion de dependencias') {
-                    steps {
-                        sh '''
-                            npm install -g pnpm
-                            pnpm --version
-                            pnpm install
-                        '''
-                    }
-                }
+        }
+        stage('CI - Instalacion de dependencias') {
+            steps {
+                sh '''
+                    docker run --rm \
+                    -v "$WORKSPACE":/workspace \
+                    -w /workspace \
+                    --user root \
+                    node:24-alpine \
+                    sh -c "npm install -g pnpm && pnpm install"
+                '''
             }
         }
     }
