@@ -5,7 +5,8 @@ pipeline {
         stage('CI - de nuestra aplicacion de contenedores'){
             agent{
                 docker {
-                    image 'node:24'
+                    image 'ghcr.io/pnpm/pnpm:latest'
+                    label 'docker'
                 }
             }
 
