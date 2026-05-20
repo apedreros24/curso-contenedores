@@ -2,7 +2,6 @@ pipeline {
     agent {
         label 'wsl'
     }
-
     stages {
         stage('Debug workspace') {
             steps {
@@ -13,7 +12,6 @@ pipeline {
                 '''
             }
         }
-
         stage('CI - Instalacion de dependencias') {
             steps {
                 sh '''
@@ -21,7 +19,7 @@ pipeline {
                     -v "$PWD":/app \
                     -w /app \
                     ghcr.io/pnpm/pnpm:latest \
-                    sh -c "pwd && ls -la && pnpm runtime set node 24 -g && pnpm --version && pnpm install"
+                    sh -c "pwd && ls -la && pnpm install"
                 '''
             }
         }
