@@ -19,7 +19,7 @@ pipeline {
                     -v "$WORKSPACE":/workspace \
                     -w /workspace \
                     node:24-alpine \
-                    sh -c "npm install -g pnpm && pwd && ls -la && pnpm install"
+                    sh -c "npm install -g pnpm && pnpm install"
                 '''
             }
         }
