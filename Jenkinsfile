@@ -2,7 +2,7 @@ pipeline {
     agent none
     environment{
         IMAGE_NAME = 'curso-contenedores'
-        DH_REPO = 'carlosmarind/curso-contenedores'
+        DH_REPO = 'apedreros24/curso-contenedores'
         GH_REPO = 'ghcr.io/apedreros24/curso-contenedores'
     }
     stages{
