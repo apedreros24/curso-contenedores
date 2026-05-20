@@ -18,15 +18,7 @@ pipeline {
                         '''
                     }
                 }
-                stage('CI - Instalacion de dependencias'){
-                    steps{
-                        sh '''
-                            pnpm runtime set node 24 -g
-                            pnpm --version
-                            pnpm install
-                        '''
-                    }
-                }
+                
             }
         }
     }
