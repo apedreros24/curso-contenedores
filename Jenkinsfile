@@ -9,15 +9,16 @@ pipeline {
         stage('CI - de nuestra aplicacion de contenedores'){
             agent{
                 docker {
-                    image 'ghcr.io/pnpm/pnpm:latest'
+                    image 'node:24-alpine'
                     label 'docker'
+                    args '--user root'
                 }
             }
             stages{
                 stage('CI - Configuracion de pnpm y node'){
                     steps{
                         sh '''
-                        pnpm runtime set node 24 -g
+                        npm install -g pnpm
                         pnpm --version
                         '''
                     }
