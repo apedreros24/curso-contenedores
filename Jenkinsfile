@@ -37,6 +37,7 @@ pipeline {
                 docker {
                     image 'node:22'
                     label 'wsl'
+                    reuseNode true
                 }
             }
             steps {
