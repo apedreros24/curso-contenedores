@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh '''
                     docker run --rm \
-                    -v "$PWD":/workspace \
+                    -v "${WORKSPACE}":/workspace \
                     -w /workspace \
                     ghcr.io/pnpm/pnpm:latest \
                     sh -c "pwd && ls -la && pnpm install"
