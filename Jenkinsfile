@@ -15,14 +15,11 @@ pipeline {
         stage('Debug Docker') {
             steps {
                 sh '''
-                    echo "=== Ruta Jenkins ==="
-                    echo $WORKSPACE
+                    echo "=== Volumenes Docker activos ==="
+                    docker volume ls
 
-                    echo "=== Prueba alpine ==="
-                    docker run --rm alpine echo "Docker funciona"
-
-                    echo "=== Que ve Docker del volumen ==="
-                    docker run --rm -v "$WORKSPACE":/test alpine ls -la /test
+                    echo "=== Inspeccion del contenedor Jenkins ==="
+                    docker inspect $(hostname) | grep -A 20 "Mounts"
                 '''
             }
         }
@@ -30,8 +27,8 @@ pipeline {
             steps {
                 sh '''
                     docker run --rm \
-                    -v "${WORKSPACE}":/workspace \
-                    -w /workspace \
+                    --volumes-from $(hostname) \
+                    -w $WORKSPACE \
                     ghcr.io/pnpm/pnpm:latest \
                     sh -c "pwd && ls -la && pnpm install"
                 '''
