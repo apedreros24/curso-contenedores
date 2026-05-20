@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'preferido'
+        label 'wsl'
     }
     stages{
         stage("Primer paso pipeline") {
