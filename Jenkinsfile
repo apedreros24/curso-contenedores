@@ -12,6 +12,20 @@ pipeline {
                 '''
             }
         }
+        stage('Debug Docker') {
+            steps {
+                sh '''
+                    echo "=== Ruta Jenkins ==="
+                    echo $WORKSPACE
+
+                    echo "=== Prueba alpine ==="
+                    docker run --rm alpine echo "Docker funciona"
+
+                    echo "=== Que ve Docker del volumen ==="
+                    docker run --rm -v "$WORKSPACE":/test alpine ls -la /test
+                '''
+            }
+        }
         stage('CI - Instalacion de dependencias') {
             steps {
                 sh '''
