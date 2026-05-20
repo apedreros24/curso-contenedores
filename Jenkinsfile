@@ -1,6 +1,5 @@
 pipeline {
     agent none
-
     stages{
         stage('CI - de nuestra aplicacion de contenedores'){
             agent{
@@ -9,12 +8,24 @@ pipeline {
                     label 'docker'
                 }
             }
-
             stages{
                 stage('CI - Instalacion de dependencias'){
-                    sh '''
-                        pnpm install
-                    '''
+                    steps{
+                        sh '''
+                            pnpm runtime set node 24 -g
+                            pnpm --version
+                            pnpm install
+                        '''
+                    }
+                }
+                stage('CI - Instalacion de dependencias'){
+                    steps{
+                        sh '''
+                            pnpm runtime set node 24 -g
+                            pnpm --version
+                            pnpm install
+                        '''
+                    }
                 }
             }
         }
