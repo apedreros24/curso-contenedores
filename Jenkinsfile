@@ -37,6 +37,7 @@ pipeline {
                 stage('CI - Revision de linter') {
                     steps {
                         sh '''
+                            rm -f tsconfig.build.tsbuildinfo
                             docker run --rm \
                             -v "$WORKSPACE":/workspace \
                             -w /workspace \
