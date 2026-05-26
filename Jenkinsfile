@@ -9,58 +9,48 @@ pipeline {
     }
     stages {
         stage('CI - de nuestra aplicacion de contenedores') {
+            agent {
+                docker {
+                    image 'node:24-alpine'
+                    label 'docker'
+                    args '--user root'
+                }
+            }
             stages {
                 stage('CI - Configuracion de pnpm y node') {
                     steps {
                         sh '''
-                            docker run --rm \
-                            -v "$WORKSPACE":/workspace \
-                            -w /workspace \
-                            --user root \
-                            node:24-alpine \
-                            sh -c "node --version && npm install -g pnpm && pnpm --version"
+                            node --version && npm install -g pnpm && pnpm --version
                         '''
                     }
                 }
                 stage('CI - Instalacion de dependencias') {
                     steps {
                         sh '''
-                            docker run --rm \
-                            -v "$WORKSPACE":/workspace \
-                            -w /workspace \
-                            --user root \
-                            node:24-alpine \
-                            sh -c "npm install -g pnpm && pnpm install"
+                            npm install -g pnpm && pnpm install
                         '''
                     }
                 }
                 stage('CI - Revision de linter') {
                     steps {
                         sh '''
-                            docker run --rm \
-                            -v "$WORKSPACE":/workspace \
-                            -w /workspace \
-                            --user root \
-                            node:24-alpine \
-                            sh -c "npm install -g pnpm && pnpm lint"
+                            npm install -g pnpm && pnpm lint
                         '''
                     }
                 }
                 stage('CI - Ejecucion de build') {
                     steps {
                         sh '''
-                            docker run --rm \
-                            -v "$WORKSPACE":/workspace \
-                            -w /workspace \
-                            --user root \
-                            node:24-alpine \
-                            sh -c "rm -f tsconfig.build.tsbuildinfo && npm install -g pnpm && pnpm build"
+                            rm -f tsconfig.build.tsbuildinfo && npm install -g pnpm && pnpm build
                         '''
                     }
                 }
             }
         }
         stage('CD - Empaquetado y distribucion') {
+            agent {
+                label 'docker'
+            }
             steps {
                 sh '''
                     docker build -t ${IMAGE_NAME}:latest .
