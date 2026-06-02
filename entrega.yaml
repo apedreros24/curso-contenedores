@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-arlette-pedreros
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-arlette-pedreros
+  namespace: ns-arlette-pedreros
+data:
+  AMBIENTE: "kubernetes"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret-arlette-pedreros
+  namespace: ns-arlette-pedreros
+type: Opaque
+stringData:
+  API_KEY: "api-key-arlette"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-arlette-pedreros
+  namespace: ns-arlette-pedreros
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-arlette-pedreros
+  template:
+    metadata:
+      labels:
+        app: app-arlette-pedreros
+    spec:
+      containers:
+        - name: app-arlette-pedreros
+          image: apedreros24/tarea-final:arlette-pedreros
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: AMBIENTE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-arlette-pedreros
+                  key: AMBIENTE
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-arlette-pedreros
+                  key: API_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-arlette-pedreros
+  namespace: ns-arlette-pedreros
+spec:
+  selector:
+    app: app-arlette-pedreros
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP

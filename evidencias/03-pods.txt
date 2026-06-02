@@ -1,0 +1,3 @@
+NAME                                    READY   STATUS    RESTARTS   AGE
+app-arlette-pedreros-854f5696cc-8dk2d   1/1     Running   0          12m
+app-arlette-pedreros-854f5696cc-kxz79   1/1     Running   0          12m

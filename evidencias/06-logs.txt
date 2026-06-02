@@ -1,0 +1,10 @@
+
+> lab3@0.0.1 start:prod
+> node dist/main
+
+[32m[Nest] 18  - [39m06/01/2026, 11:52:06 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 18  - [39m06/01/2026, 11:52:06 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +12ms[39m
+[32m[Nest] 18  - [39m06/01/2026, 11:52:06 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 18  - [39m06/01/2026, 11:52:06 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +5ms[39m
+[32m[Nest] 18  - [39m06/01/2026, 11:52:06 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/lab, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 18  - [39m06/01/2026, 11:52:06 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
