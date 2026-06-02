@@ -111,3 +111,12 @@ Incluyen:
 * Secret
 * Docker Hub
 * Validación de la aplicación
+
+## IMPORTANTE
+## Permisos Jenkins
+
+Si Jenkins no posee permisos para desplegar recursos en Kubernetes, aplicar:
+
+kubectl apply -f jenkins-rbac.yaml
+
+Esto asigna permisos al ServiceAccount utilizado por Jenkins para ejecutar el stage deploy.
