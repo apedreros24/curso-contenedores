@@ -1,2 +1,2 @@
 NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
-svc-arlette-pedreros   ClusterIP   10.107.64.163   <none>        80/TCP    12m
+svc-arlette-pedreros   ClusterIP   10.107.64.163   <none>        80/TCP    115m
