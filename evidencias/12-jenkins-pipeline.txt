@@ -1,0 +1,474 @@
+Started by user Jenkins Admin
+
+ > git rev-parse --resolve-git-dir /var/jenkins_home/caches/git-b4d98edea01a4e29bef6809ea02b4c6b/.git # timeout=10
+Setting origin to https://github.com/apedreros24/curso-contenedores.git
+ > git config remote.origin.url https://github.com/apedreros24/curso-contenedores.git # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git config --get remote.origin.url # timeout=10
+ > git fetch --no-tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/develop
+Seen branch in repository origin/lab3-arlette-pedreros
+Seen branch in repository origin/main
+Seen 3 remote branches
+Obtained Jenkinsfile from 4f2c3f091657087a31b232dec1d66f2ee42fd3f2
+[Pipeline] Start of Pipeline
+[Pipeline] readTrusted
+Obtained agent.yaml from 4f2c3f091657087a31b232dec1d66f2ee42fd3f2
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+Created Pod: kubernetes jenkins/curso-contenedores-lab3-arlette-pedreros-4-x1nk0-p2621-jzr62
+[PodInfo] jenkins/curso-contenedores-lab3-arlette-pedreros-4-x1nk0-p2621-jzr62
+	Container [docker] waiting [ContainerCreating] No message
+	Container [jnlp] waiting [ContainerCreating] No message
+	Container [kubectl] waiting [ContainerCreating] No message
+	Container [node] waiting [ContainerCreating] No message
+	Pod [Pending][ContainersNotReady] containers with unready status: [node docker kubectl jnlp]
+Agent curso-contenedores-lab3-arlette-pedreros-4-x1nk0-p2621-jzr62
+ is provisioned from template curso-contenedores_lab3-arlette-pedreros_4-x1nk0-p2621
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    kubernetes.jenkins.io/last-refresh: "1780363394738"
+    buildUrl: "http://jenkins.jenkins.svc.cluster.local:8080/job/curso-contenedores/job/lab3-arlette-pedreros/4/"
+    runUrl: "job/curso-contenedores/job/lab3-arlette-pedreros/4/"
+  labels:
+    app: "jenkins-agent-arlette-pedreros"
+    jenkins/jenkins-jenkins-agent: "true"
+    jenkins/label-digest: "f4755472747b871dabbcfef8ccab2aebdaeeac62"
+    jenkins/label: "curso-contenedores_lab3-arlette-pedreros_4-x1nk0"
+    kubernetes.jenkins.io/controller: "http___jenkins_jenkins_svc_cluster_local_8080x"
+  name: "curso-contenedores-lab3-arlette-pedreros-4-x1nk0-p2621-jzr62"
+  namespace: "jenkins"
+spec:
+  containers:
+  - command:
+    - "cat"
+    image: "node:24-alpine"
+    name: "node"
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - command:
+    - "cat"
+    image: "docker:27-cli"
+    name: "docker"
+    tty: true
+    volumeMounts:
+    - mountPath: "/var/run/docker.sock"
+      name: "docker-sock"
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - command:
+    - "cat"
+    image: "alpine/k8s:1.34.1"
+    name: "kubectl"
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins-agent.jenkins.svc.cluster.local:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "curso-contenedores-lab3-arlette-pedreros-4-x1nk0-p2621-jzr62"
+    - name: "REMOTING_OPTS"
+      value: "-noReconnectAfter 1d"
+    - name: "JENKINS_NAME"
+      value: "curso-contenedores-lab3-arlette-pedreros-4-x1nk0-p2621-jzr62"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins.jenkins.svc.cluster.local:8080/"
+    image: "jenkins/inbound-agent:3355.v388858a_47b_33-3-jdk21"
+    name: "jnlp"
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+  restartPolicy: "Never"
+  volumes:
+  - hostPath:
+      path: "/var/run/docker.sock"
+    name: "docker-sock"
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+
+Running on curso-contenedores-lab3-arlette-pedreros-4-x1nk0-p2621-jzr62
+ in /home/jenkins/agent/workspace/ntenedores_lab3-arlette-pedreros
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://github.com/apedreros24/curso-contenedores.git
+ > git init /home/jenkins/agent/workspace/ntenedores_lab3-arlette-pedreros # timeout=10
+Fetching upstream changes from https://github.com/apedreros24/curso-contenedores.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --no-tags --force --progress -- https://github.com/apedreros24/curso-contenedores.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/apedreros24/curso-contenedores.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 4f2c3f091657087a31b232dec1d66f2ee42fd3f2 (lab3-arlette-pedreros)
+Commit message: "Corrige imagen kubectl en agent Jenkins"
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4f2c3f091657087a31b232dec1d66f2ee42fd3f2 # timeout=10
+ > git rev-list --no-walk 4f2c3f091657087a31b232dec1d66f2ee42fd3f2 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (install)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ npm install -g pnpm
+
+added 1 package in 3s
+
+1 package is looking for funding
+  run `npm fund` for details
++ pnpm install
+? Verifying lockfile against supply-chain policies (670 entries)...
+✓ Lockfile passes supply-chain policies (670 entries in 10s)
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +643
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 643, reused 0, downloaded 13, added 0
+Progress: resolved 643, reused 0, downloaded 167, added 74
+Progress: resolved 643, reused 0, downloaded 319, added 198
+Progress: resolved 643, reused 0, downloaded 518, added 343
+Progress: resolved 643, reused 0, downloaded 642, added 585
+Progress: resolved 643, reused 0, downloaded 643, added 643, done
+
+dependencies:
++ @nestjs/common 11.1.24
++ @nestjs/core 11.1.24
++ @nestjs/platform-express 11.1.24
++ reflect-metadata 0.2.2
++ rxjs 7.8.2
+
+devDependencies:
++ @eslint/eslintrc 3.3.5
++ @eslint/js 9.39.4
++ @nestjs/cli 11.0.21
++ @nestjs/schematics 11.1.0
++ @nestjs/testing 11.1.24
++ @types/express 5.0.6
++ @types/jest 30.0.0
++ @types/node 24.12.4
++ @types/supertest 7.2.0
++ eslint 9.39.4
++ eslint-config-prettier 10.1.8
++ eslint-plugin-prettier 5.5.6
++ globals 17.6.0
++ jest 30.4.2
++ prettier 3.8.3
++ source-map-support 0.5.21
++ supertest 7.2.2
++ ts-jest 29.4.11
++ ts-loader 9.6.0
++ ts-node 10.9.2
++ tsconfig-paths 4.2.0
++ typescript 5.9.3
++ typescript-eslint 8.60.0
+
+Done in 17.6s using pnpm v11.5.0
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (test)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ pnpm test
+$ jest
+PASS src/env-config.spec.ts
+PASS src/app.controller.spec.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        2.451 s
+Ran all test suites.
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (build)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ docker build -t apedreros24/tarea-final:arlette-pedreros .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 186B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:24-alpine
+#2 DONE 0.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 94B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/library/node:24-alpine@sha256:d1b3b4da11eefd5941e7f0b9cf17783fc99d9c6fc34884a665f40a06dbdfc94f
+#4 resolve docker.io/library/node:24-alpine@sha256:d1b3b4da11eefd5941e7f0b9cf17783fc99d9c6fc34884a665f40a06dbdfc94f 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 223.85kB 0.0s done
+#5 DONE 0.0s
+
+#6 [5/6] COPY . .
+#6 CACHED
+
+#7 [2/6] WORKDIR /app
+#7 CACHED
+
+#8 [3/6] COPY package*.json ./
+#8 CACHED
+
+#9 [4/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 exporting manifest sha256:21e32010b89a461bb537517770843f8159800ebfb26a827c525008fd801a2982 done
+#11 exporting config sha256:4d121b7d1011b3dbd6f0513d6ded105f6437db74f72da28154472fbd1ed299c1 done
+#11 exporting attestation manifest sha256:b51bec29e1946387f7ca30725f91b18955243d43209bab1293ff5ce09c7a20c1 0.0s done
+#11 exporting manifest list sha256:e6799d61c426b77ee6bbb55c3abaa1776983a22386f7d9320a09a877b9ba998c
+#11 exporting manifest list sha256:e6799d61c426b77ee6bbb55c3abaa1776983a22386f7d9320a09a877b9ba998c 0.0s done
+#11 naming to docker.io/apedreros24/tarea-final:arlette-pedreros done
+#11 unpacking to docker.io/apedreros24/tarea-final:arlette-pedreros 0.0s done
+#11 DONE 0.2s
+WARNING: current commit information was not captured by the build: failed to read current commit information with git rev-parse --is-inside-work-tree
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (push)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DOCKER_PASS
+[Pipeline] {
+[Pipeline] sh
++ echo ****
++ docker login -u apedreros24 --password-stdin
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
++ docker push apedreros24/tarea-final:arlette-pedreros
+The push refers to repository [docker.io/apedreros24/tarea-final]
+ce01ebc6f8ff: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Waiting
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+6a0ac1617861: Waiting
+e2c91e0d9569: Layer already exists
+89890f853f08: Waiting
+b8b88650d6c9: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+89890f853f08: Layer already exists
+b8b88650d6c9: Layer already exists
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+caaef0147c9e: Waiting
+d7319775d025: Waiting
+07865b932220: Waiting
+3eebacc30b80: Waiting
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Waiting
+6a0ac1617861: Waiting
+3eebacc30b80: Layer already exists
+ce01ebc6f8ff: Waiting
+1ba15d4bb83a: Layer already exists
+6a0ac1617861: Layer already exists
+caaef0147c9e: Layer already exists
+d7319775d025: Layer already exists
+07865b932220: Layer already exists
+ce01ebc6f8ff: Waiting
+ce01ebc6f8ff: Waiting
+ce01ebc6f8ff: Pushed
+arlette-pedreros: digest: sha256:e6799d61c426b77ee6bbb55c3abaa1776983a22386f7d9320a09a877b9ba998c size: 856
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (deploy)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ kubectl apply -f entrega.yaml
+namespace/ns-arlette-pedreros unchanged
+configmap/config-arlette-pedreros unchanged
+secret/secret-arlette-pedreros configured
+deployment.apps/app-arlette-pedreros unchanged
+service/svc-arlette-pedreros unchanged
++ kubectl rollout status deployment/app-arlette-pedreros -n ns-arlette-pedreros
+deployment "app-arlette-pedreros" successfully rolled out
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+Finished: SUCCESS
